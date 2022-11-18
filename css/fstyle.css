@@ -1,0 +1,189 @@
+/* tamano de la fuente menu user*/
+
+.fsmu {
+    font-size: 22.85px;
+}
+
+
+/* tamano de la fuente */
+
+.fs04 {
+    font-size: .4em;
+}
+
+.fs05 {
+    font-size: .5em;
+}
+
+.fs06 {
+    font-size: .6em;
+}
+
+.fs07 {
+    font-size: .7em;
+}
+
+.fs08 {
+    font-size: .8em;
+}
+
+.fs09 {
+    font-size: .9em;
+}
+
+.fs1 {
+    font-size: 1em;
+}
+
+.fs12 {
+    font-size: 1.2em;
+}
+
+.fs15 {
+    font-size: 1.5em;
+}
+
+.fs18 {
+    font-size: 1.8em;
+}
+
+.fs2 {
+    font-size: 2em;
+}
+
+.fs25 {
+    font-size: 2.5em;
+}
+
+.fs3 {
+    font-size: 3em;
+}
+
+.fs4 {
+    font-size: 4em;
+}
+
+.fs5 {
+    font-size: 5óem;
+}
+
+
+/* alto de la linea */
+
+.lh1 {
+    line-height: 1em;
+}
+
+.lh11 {
+    line-height: 1.1em;
+}
+
+.lh12 {
+    line-height: 1.2em;
+}
+
+.lh13 {
+    line-height: 1.3em;
+}
+
+.lh14 {
+    line-height: 1.4em;
+}
+
+.lh15 {
+    line-height: 1.5em;
+}
+
+.lh2 {
+    line-height: 2em;
+}
+
+.lh25 {
+    line-height: 2.5em;
+}
+
+.lh3 {
+    line-height: 3em;
+}
+
+
+/* style */
+
+.bol1 {
+    font-weight: 100;
+}
+
+.bol2 {
+    font-weight: 200;
+}
+
+.bol3 {
+    font-weight: 300;
+}
+
+.bol4 {
+    font-weight: 400;
+}
+
+.bol5 {
+    font-weight: 500;
+}
+
+.bol6 {
+    font-weight: 600;
+}
+
+.bol7 {
+    font-weight: 700;
+}
+
+.bol8 {
+    font-weight: 800;
+}
+
+.bol9 {
+    font-weight: 900;
+}
+
+
+/* italic */
+
+.fita {
+    font-style: italic;
+}
+
+
+/*  puntero */
+
+.click {
+    cursor: pointer;
+}
+
+
+/*  alinineamiento de texto*/
+
+.tar {
+    text-align: right;
+}
+
+.tal {
+    text-align: left;
+}
+
+.tac {
+    text-align: center;
+}
+
+
+/* ESPECIALES */
+
+.under {
+    text-decoration: underline;
+}
+
+/* Etiqueta */
+/* familias */
+
+.tittillium {
+    font-family: 'Titillium Web', Helvetica, Arial, Lucida, sans-serif;
+}

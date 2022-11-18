@@ -1,0 +1,245 @@
+@import "root.css";
+@import "colors.css";
+@import "width.css";
+@import "flex.css";
+@import "botones.css";
+@import "margins.css";
+@import "fstyle.css";
+@import "librerias.css";
+@import "select.css";
+@import "height.css";
+
+/* Using a string */
+
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    /* background-color: #f0f2f2; */
+}
+
+html {
+    user-select: none;
+}
+
+@media print {
+    html,
+    body {
+        /* Hide the whole page */
+        display: none;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.none {
+    cursor: none;
+}
+
+.tooltip-black {
+    --balloon-color: black;
+}
+
+
+/* FRONT PAGE  */
+
+.mainbox {
+    display: block;
+    position: relative;
+    height: 100vh;
+    width: 360px;
+    margin: 0px auto;
+}
+
+.contenido {
+    display: block;
+    position: relative;
+    height: 100vh;
+    width: 360px;
+    margin: 0px auto;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 150px;
+    position: fixed;
+    padding: 15px 5px;
+    top: 200px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(214, 214, 214);
+    border-radius: 0px 15px 15px 0px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.menuadm {
+    top: 160px !important;
+    height: 190px !important;
+}
+
+.menu div {
+    display: block;
+    text-align: center;
+}
+
+.menu div a {
+    text-decoration: none;
+    color: black;
+}
+
+.logo1 {
+    display: block;
+    width: 200px;
+    margin: 150px auto 0px auto;
+}
+
+.logo2 {
+    display: block;
+    width: 30px;
+    margin-left: 20px;
+    padding: 5px 10px;
+}
+
+.okpng {
+    display: block;
+    width: 120px;
+    margin: 150px auto 0px auto;
+}
+
+label[for='subtit'] {
+    display: block;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: .8em;
+    text-align: center;
+    font-weight: 700;
+}
+
+label[for='timer'] {
+    display: block;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: .7em;
+    text-align: center;
+    font-weight: 500;
+    margin-left: -30px;
+}
+
+label[for='msg1'] {
+    display: block;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+form textarea[name="motivo"] {
+    width: 65%;
+    height: 200px;
+    padding: 10px;
+}
+
+.leftHead {
+    display: block;
+    background-color: rgb(188, 230, 216);
+    margin-bottom: 25px;
+}
+
+
+/* 
+lista de citas
+*/
+
+.laCita {
+    width: 75%;
+    min-height: 100px;
+    margin: 20px auto 5px auto;
+}
+
+.detalle {
+    display: block;
+    width: 90%;
+    font-family: 'Nunito', sans-serif;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px auto 10px auto;
+    padding: 10px;
+    line-height: 1.5em;
+    font-size: .8em;
+}
+
+.borrar {
+    font-size: 1.5em;
+    padding-top: 30px;
+    cursor: pointer;
+    margin: -25px 10px 10px 40px;
+    color: var(--blueboton);
+}
+
+.borrar:hover {
+    color: red;
+}
+
+
+/* 
+bloque de turnos
+*/
+
+.bloqueturnos {
+    display: block;
+    width: 88%;
+    margin: 20px 0px 20px 50px;
+}
+
+.bloqueturnos>div {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.turno {
+    color: green;
+}
+
+.delturno {
+    cursor: pointer;
+    color: var(--blueboton);
+}
+
+.delturno:hover {
+    color: red;
+}
+
+.reservado {
+    display: block;
+    width: 82%;
+    min-height: 100px;
+    margin-bottom: 5px;
+    margin-left: 55px;
+    font-family: 'Nunito', sans-serif;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width:1024px) {}
+
+@media screen and (max-width:768px) {}
+
+@media screen and (max-width:425px) {}

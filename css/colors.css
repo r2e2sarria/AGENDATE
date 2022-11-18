@@ -1,0 +1,645 @@
+/* TALENTUS COLORS  */
+
+.blueBoton {
+    color: #4046FE
+}
+
+.bluelateral {
+    color: #150D51
+}
+
+.tale1 {
+    color: #1a1550;
+}
+
+.tale2 {
+    color: #732fc8;
+}
+
+.tale3 {
+    color: #693bbd;
+}
+
+.tale4 {
+    color: #9b51e0;
+}
+
+.tale5 {
+    color: #b797e0;
+}
+
+.tale6 {
+    color: #c3c3c3;
+}
+
+.tale7 {
+    color: #02feff;
+}
+
+.tale8 {
+    color: #4046ff;
+}
+
+.tale9 {
+    color: #2ea3f2;
+}
+
+.tale10 {
+    color: #343452;
+}
+
+.tale11 {
+    color: #8b1cff;
+}
+
+
+/* STANDAR COLORS */
+
+.cblack {
+    color: #000000;
+}
+
+.caliceblue {
+    color: #f0f8ff;
+}
+
+.cantiquewhite {
+    color: #faebd7;
+}
+
+.caqua {
+    color: #00ffff;
+}
+
+.caquamarine {
+    color: #7fffd4;
+}
+
+.cazure {
+    color: #f0ffff;
+}
+
+.cbeige {
+    color: #f5f5dc;
+}
+
+.cbisque {
+    color: #ffe4c4;
+}
+
+.cblanchedalmond {
+    color: #ffebcd;
+}
+
+.cblue {
+    color: #0000ff;
+}
+
+.cblueviolet {
+    color: #8a2be2;
+}
+
+.cbrown {
+    color: #a52a2a;
+}
+
+.cburlywood {
+    color: #deb887;
+}
+
+.ccadetblue {
+    color: #5f9ea0;
+}
+
+.cchartreuse {
+    color: #7fff00;
+}
+
+.cchocolate {
+    color: #d2691e;
+}
+
+.ccoral {
+    color: #ff7f50;
+}
+
+.ccornflowerblue {
+    color: #6495ed;
+}
+
+.ccornsilk {
+    color: #fff8dc;
+}
+
+.ccrimson {
+    color: #dc143c;
+}
+
+.ccyan {
+    color: #00ffff;
+}
+
+.cdarkblue {
+    color: #00008b;
+}
+
+.cdarkcyan {
+    color: #008b8b;
+}
+
+.cdarkgoldenrod {
+    color: #b8860b;
+}
+
+.cdarkgray {
+    color: #a9a9a9;
+}
+
+.cdarkgreen {
+    color: #006400;
+}
+
+.cdarkgrey {
+    color: #a9a9a9;
+}
+
+.cdarkkhaki {
+    color: #bdb76b;
+}
+
+.cdarkmagenta {
+    color: #8b008b;
+}
+
+.cdarkolivegreen {
+    color: #556b2f;
+}
+
+.cdarkorange {
+    color: #ff8c00;
+}
+
+.cdarkorchid {
+    color: #9932cc;
+}
+
+.cdarkred {
+    color: #8b0000;
+}
+
+.cdarksalmon {
+    color: #e9967a;
+}
+
+.cdarkseagreen {
+    color: #8fbc8f;
+}
+
+.cdarkslateblue {
+    color: #483d8b;
+    max-height: ;
+}
+
+.cdarkslategray {
+    color: #2f4f4f;
+}
+
+.cdarkslategrey {
+    color: #2f4f4f;
+}
+
+.cdarkturquoise {
+    color: #00ced1;
+}
+
+.cdarkviolet {
+    color: #9400d3;
+}
+
+.cdeeppink {
+    color: #ff1493;
+}
+
+.cdeepskyblue {
+    color: #00bfff;
+}
+
+.cdimgray {
+    color: #696969;
+}
+
+.cdodgerblue {
+    color: #1e90ff;
+}
+
+.cfirebrick {
+    color: #b22222;
+}
+
+.cfloralwhite {
+    color: #fffaf0;
+}
+
+.cforestgreen {
+    color: #228b22;
+}
+
+.cfuchsia {
+    color: #ff00ff;
+}
+
+.cgainsboro {
+    color: #dcdcdc;
+}
+
+.cghostwhite {
+    color: #f8f8ff;
+}
+
+.cgold {
+    color: #ffd700;
+}
+
+.cgoldenrod {
+    color: #daa520;
+}
+
+.cgray {
+    color: #808080;
+}
+
+.cgreen {
+    color: #008000;
+}
+
+.cgreenyellow {
+    color: #adff2f;
+}
+
+.cgrey {
+    color: #808080;
+}
+
+.choneydew {
+    color: #f0fff0;
+}
+
+.chotpink {
+    color: #ff69b4;
+}
+
+.cindianred {
+    color: #cd5c5c;
+}
+
+.cindigo {
+    color: #4b0082;
+}
+
+.civory {
+    color: #fffff0;
+}
+
+.ckhaki {
+    color: #f0e68c;
+}
+
+.clavender {
+    color: #e6e6fa;
+}
+
+.clavenderblush {
+    color: #fff0f5;
+}
+
+.clawngreen {
+    color: #7cfc00;
+}
+
+.clemonchiffon {
+    color: #fffacd;
+}
+
+.clightblue {
+    color: #add8e6;
+}
+
+.clightcoral {
+    color: #f08080;
+}
+
+.clightcyan {
+    color: #e0ffff;
+}
+
+.clightgoldenrodyellow {
+    color: #fafad2;
+}
+
+.clightgray {
+    color: #d3d3d3;
+}
+
+.clightgreen {
+    color: #90ee90;
+}
+
+.clightgrey {
+    color: #d3d3d3;
+}
+
+.clightpink {
+    color: #ffb6c1;
+}
+
+.clightsalmon {
+    color: #ffa07a;
+}
+
+.clightseagreen {
+    color: #20b2aa;
+}
+
+.clightskyblue {
+    color: #87cefa;
+}
+
+.clightslategray {
+    color: #778899;
+}
+
+.clightslategrey {
+    color: #778899;
+}
+
+.clightsteelblue {
+    color: #b0c4de;
+}
+
+.clightyellow {
+    color: #ffffe0;
+}
+
+.clime {
+    color: #00ff00;
+}
+
+.climegreen {
+    color: #32cd32;
+}
+
+.clinen {
+    color: #faf0e6;
+}
+
+.cmagenta {
+    color: #ff00ff;
+}
+
+.cmaroon {
+    color: #800000;
+}
+
+.cmediumaquamarine {
+    color: #66cdaa;
+}
+
+.cmediumblue {
+    color: #0000cd;
+}
+
+.cmediumorchid {
+    color: #ba55d3;
+}
+
+.cmediumpurple {
+    color: #9370db;
+}
+
+.cmediumseagreen {
+    color: #3cb371;
+}
+
+.cmediumslateblue {
+    color: #7b68ee;
+}
+
+.cmediumspringgreen {
+    color: #00fa9a;
+}
+
+.cmediumturquoise {
+    color: #48d1cc;
+}
+
+.cmediumvioletred {
+    color: #c71585;
+}
+
+.cmidnightblue {
+    color: #191970;
+}
+
+.cmintcream {
+    color: #f5fffa;
+}
+
+.cmistyrose {
+    color: #ffe4e1;
+}
+
+.cmoccasin {
+    color: #ffe4b5;
+}
+
+.cnavajowhite {
+    color: #ffdead;
+}
+
+.cnavy {
+    color: #000080;
+}
+
+.coldlace {
+    color: #fdf5e6;
+}
+
+.colive {
+    color: #808000;
+}
+
+.colivedrab {
+    color: #6b8e23;
+}
+
+.corange {
+    color: #ffa500;
+}
+
+.corangered {
+    color: #ff4500;
+}
+
+.corchid {
+    color: #da70d6;
+}
+
+.cpalegoldenrod {
+    color: #eee8aa;
+}
+
+.cpalegreen {
+    color: #98fb98;
+}
+
+.cpaleturquoise {
+    color: #afeeee;
+}
+
+.cpalevioletred {
+    color: #db7093;
+}
+
+.cpapayawhip {
+    color: #ffefd5;
+}
+
+.cpeachpuff {
+    color: #ffdab9;
+}
+
+.cperu {
+    color: #cd853f;
+}
+
+.cpink {
+    color: #ffc0cb;
+}
+
+.cplum {
+    color: #dda0dd;
+}
+
+.cpowderblue {
+    color: #b0e0e6;
+}
+
+.cpurple {
+    color: #800080;
+}
+
+.cred {
+    color: #ff0000;
+}
+
+.crosybrown {
+    color: #bc8f8f;
+}
+
+.croyalblue {
+    color: #4e1;
+}
+
+.csaddlebrown {
+    color: #8b4513;
+}
+
+.csalmon {
+    color: #fa8072;
+}
+
+.csandybrown {
+    color: #f4a460;
+}
+
+.cseagreen {
+    color: #2e8b57;
+}
+
+.cseashell {
+    color: #fff5ee;
+}
+
+.csienna {
+    color: #a0522d;
+}
+
+.csilver {
+    color: #c0c0c0;
+}
+
+.cskyblue {
+    color: #87ceeb;
+}
+
+.cslateblue {
+    color: #6a5acd;
+}
+
+.cslategray {
+    color: #708090;
+}
+
+.cslategrey-back {
+    color: #b5cde4;
+}
+
+.cslategrey-BACK {
+    color: #deebf9;
+}
+
+.csnow {
+    color: #fffafa;
+}
+
+.cspringgreen {
+    color: #00ff7f;
+}
+
+.csteelblue {
+    color: #4682b4;
+}
+
+.ctan {
+    color: #d2b48c;
+}
+
+.cteal {
+    color: #008080;
+}
+
+.cthistle {
+    color: #d8bfd8;
+}
+
+.ctomato {
+    color: #ff6347;
+}
+
+.cturquoise {
+    color: #40e0d0;
+}
+
+.cviolet {
+    color: #ee82ee;
+}
+
+.cwheat {
+    color: #f5deb3;
+}
+
+.cwhite {
+    color: #ffffff;
+}
+
+.cwhitesmoke {
+    color: #f5f5f5;
+}
+
+.cyellow {
+    color: #ffff00;
+}
+
+.cyellowgreen {
+    color: #9acd32;
+}

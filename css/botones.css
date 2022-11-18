@@ -1,0 +1,131 @@
+    .boton {
+        display: block;
+        border-radius: 8px;
+        padding: 8px 12px;
+        background-color: var(--blueboton);
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .boton a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .botonAux {
+        display: block;
+        border-radius: 20px;
+        padding: 8px 12px;
+        border: solid 1px var(--blueboton);
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .botonAux_blue {
+        display: block;
+        border-radius: 8px;
+        padding: 8px 12px;
+        border: solid 1px var(--blueboton);
+        background-color: white;
+        color: var(--blueboton);
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .botonAux_white {
+        display: block;
+        border-radius: 20px;
+        padding: 6px 14px;
+        border: solid 0px var(--blueboton);
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        text-align: center;
+        font-size: .8em;
+        margin-bottom: 15px;
+    }
+    
+    .botonAux_blue a,
+    .botonAux a {
+        text-decoration: none;
+        color: var(--blueboton);
+    }
+    
+    .botonAux_blue:hover a,
+    .botonAux:hover a {
+        color: white;
+    }
+    
+    .botonAux_blue:hover,
+    .botonAux:hover {
+        background-color: var(--blueboton);
+        color: white;
+    }
+    
+    .botc {
+        margin: 0px auto 30px auto!important;
+    }
+    
+    .botr {
+        margin-left: auto;
+        margin-right: 0;
+    }
+    
+    .botl {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    
+    .botonEnviar {
+        display: block;
+        border-radius: 24px;
+        padding: 12px;
+        background-color: var(--blueboton);
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    .botonFile {
+        display: block;
+        width: 250px;
+        border-radius: 24px;
+        padding: 12px 12px;
+        background-color: var(--blueboton);
+        color: white;
+        cursor: pointer;
+    }
+    
+    .botonFileMini,
+    .botonFileMiniFix {
+        display: block;
+        width: 28px;
+        height: 24px;
+        border-radius: 2px;
+        padding: 5px 1px 0px 1px;
+        background-color: var(--blueboton);
+        color: white;
+        cursor: pointer;
+        border-radius: 50%;
+        text-align: center;
+    }
+    
+    .botonFileMiniFix {
+        margin-top: -19px;
+    }
+    
+    .boton:hover,
+    .botonAux:hover,
+    .botonFileMini:hover {
+        -webkit-box-shadow: 0px 5px 7px -4px #000000, 6px 5px 8px 1px rgba(0, 0, 0, 0);
+        box-shadow: 0px 5px 7px -4px #000000, 6px 5px 8px 1px rgba(0, 0, 0, 0);
+    }
+    
+    h4 {
+        font-size: 16px;
+        font-family: "Trebuchet MS", Verdana;
+        line-height: 18px;
+    }

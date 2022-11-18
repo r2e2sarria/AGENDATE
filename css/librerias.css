@@ -1,0 +1,234 @@
+/* titulo y labels */
+
+label[for="titulo"] {
+    font-family: var(--open-f);
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--blueboton);
+}
+
+label[for="subtitulo"] {
+    font-family: var(--open-f);
+    font-size: 1em;
+    font-weight: 400;
+}
+
+label[for="subtituloBold"] {
+    font-family: var(--open-f);
+    font-size: 1em;
+    font-weight: 700;
+}
+
+label[for="menuTit"] {
+    display: block;
+    font-family: var(--Titillium Web-f);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+label[for="menuItem"] {
+    display: block;
+    width: 200px;
+    font-family: var(--Titillium Web-f);
+    font-size: 16px;
+    font-weight: 500;
+    color: #2E358B;
+    cursor: pointer;
+    padding: 7px 10px 7px 15px;
+}
+
+label[for="chapter"] {
+    font-family: var(--open-f);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+label[for="schapter"] {
+    font-family: var(--open-f);
+    font-size: 1.2em;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+label[for="field"] {
+    font-family: var(--Titillium Web-f);
+    font-size: .8em;
+    font-weight: 600;
+}
+
+label[for="error"] {
+    display: block;
+    font-family: var(--open-f);
+    font-size: .7em;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+label[for="caso"] {
+    display: block;
+    font-family: var(--open-f);
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: -10px !important;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="text"],
+input[type="number"],
+select {
+    display: block;
+    width: 70%;
+    background-color: #dedcdc;
+    border-color: rgb(214, 214, 214);
+    border-radius: 9px 9px;
+    box-shadow: 1px 1px 4px rgba(180, 178, 178, 0.2);
+    border-style: solid;
+    margin-top: 1px;
+    padding: 8px 8px;
+    background-color: white;
+    border-width: 1px;
+    border-color: grey;
+    margin: 0px auto 25px auto;
+    font-size: 1.2em;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="text"],
+input[type="number"] {
+    display: block;
+    width: 65% !important;
+}
+
+input[name="hora"] {
+    width: 100px !important;
+    padding-left: 20px;
+    margin-left: 15px;
+}
+
+input[type="number"] {
+    height: 26px;
+}
+
+form div label {
+    display: block;
+    font-size: .7em;
+    color: rgb(133, 133, 133);
+    margin: 0px 0px 7px 55px;
+}
+
+form div input::placeholder {
+    font-size: .7em;
+}
+
+form div input[type="date"] {
+    font-size: .8em;
+    color: rgb(133, 133, 133);
+}
+
+
+/* clase de vivienda */
+
+.cv input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2);
+    /* IE */
+    -moz-transform: scale(2);
+    /* FF */
+    -webkit-transform: scale(2);
+    /* Safari and Chrome */
+    -o-transform: scale(2);
+    /* Opera */
+    transform: scale(2);
+    padding: 10px;
+    margin-top: 12px;
+    margin-left: 18px;
+}
+
+
+/* input money label */
+
+.pesos {
+    display: inline-block;
+    position: relative;
+}
+
+.pesos input {
+    padding-left: 15px;
+}
+
+.pesos:before {
+    position: absolute;
+    content: "$";
+    left: 5px;
+    top: 11px;
+}
+
+
+/* slider */
+
+
+/* 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 4px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
