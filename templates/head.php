@@ -19,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <link rel="stylesheet" href="css/style.css">
         <script src="js/scripts.js"></script>
 
-        <title>Agendate</title>
+        <title>AGENDATE</title>
     </head>
 
     <body>
