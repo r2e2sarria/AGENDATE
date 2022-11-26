@@ -75,6 +75,146 @@ function showDetalleCita(x) {
     }
 }
 
+// ELIMINAR un turno de cita no reservado
+
+function eliminar(x) {
+    var id = x;
+    jQuery.ajax({
+        url: "util/eliminaCitas.php",
+        type: "POST",
+        data: {
+            id: id,
+        },
+        success: function(data) {
+            window.location.reload(true);
+            // $("#idname").html(data);
+        },
+        error: function() {},
+    });
+}
+
+// CANCELAR una cita reservada
+
+function cancelar(x) {
+    var id = x;
+    jQuery.ajax({
+        url: "util/cancelarCitas.php",
+        type: "POST",
+        data: {
+            id: id,
+        },
+        success: function(data) {
+            window.location.reload(true);
+            // $("#error").html(data);
+        },
+        error: function() {},
+    });
+}
+
+// marcar una cita como AUSENTE 
+
+function ausente(x) {
+    var id = x;
+    jQuery.ajax({
+        url: "util/ausenteCitas.php",
+        type: "POST",
+        data: {
+            id: id,
+        },
+        success: function(data) {
+            window.location.reload(true);
+            // $("#error").html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Formulario para TRANSFERIR una cita a otro asesor o consejero
+
+function transferir(x, c) {
+    var id = x;
+    var cid = c;
+    jQuery.ajax({
+        url: "util/transfiereCitas.php",
+        type: "POST",
+        data: {
+            id: id,
+            cid: cid,
+        },
+        success: function(data) {
+            // window.location.reload(true);
+            $("#ventanaAux" + id).html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Ejecutar la Transferencia
+
+function hacerTransferencia(x) {
+    var id = x;
+    var asesor = $("#asesor").val();
+    jQuery.ajax({
+        url: "util/hacerTransferencia.php",
+        type: "POST",
+        data: {
+            id: id,
+            asesor: asesor,
+        },
+        success: function(data) {
+            window.location.reload(true);
+            //$("#ventanaAux" + id).html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Formulario para enviar mensaje
+function mensaje(x, t) {
+    var id = x;
+    var type = t;
+    jQuery.ajax({
+        url: "util/escribeMensaje.php",
+        type: "POST",
+        data: {
+            id: id,
+            type: type,
+        },
+        success: function(data) {
+            //window.location.reload(true);
+            $("#ventanaAux" + id).html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Conecta con el proceso de enviar el mensaje
+
+function enviarMensaje(x, t) {
+    var id = x;
+    var type = t;
+    var memo = $("#memo").val();
+    jQuery.ajax({
+        url: "util/enviarMensaje.php",
+        type: "POST",
+        data: {
+            id: id,
+            type: type,
+            memo: memo,
+        },
+        success: function(data) {
+            // window.location.reload(true);
+            $("#labelexito").html("MENSAJE ENVIADO");
+
+            function hideMsg() {
+                $("#ventanaAux" + id).html(data);
+            }
+            setTimeout(hideMsg, 3000);
+        },
+        error: function() {},
+    });
+}
+
 
 // // // // // // // // // // // 
 

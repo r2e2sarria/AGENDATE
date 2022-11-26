@@ -222,7 +222,7 @@ bloque de turnos
 
 .delturnoget {
     display: block;
-    width: 1.2em;
+    width: 1em;
 }
 
 .delturno:hover {
@@ -246,6 +246,17 @@ VENTA DE LA CITA
     border-color: rgb(170, 170, 170);
     border-radius: 5px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.textarea1 {
+    width: 80%;
+    margin: 10px auto;
+}
+
+.textarea1 textarea {
+    width: 100%;
+    height: 80px;
+    padding: 5PX;
 }
 
 @media screen and (max-width:1024px) {}
