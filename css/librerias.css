@@ -75,6 +75,7 @@ label[for="caso"] {
 input[type="date"],
 input[type="time"],
 input[type="text"],
+input[type="password"],
 input[type="number"],
 select {
     display: block;
@@ -96,6 +97,7 @@ select {
 input[type="date"],
 input[type="time"],
 input[type="text"],
+input[type="password"],
 input[type="number"] {
     display: block;
     width: 65% !important;

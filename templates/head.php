@@ -1,7 +1,20 @@
 <?php
+/* 
+ TOP INCLUYE HTMLT5
+*/ 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+if($_SERVER['SERVER_NAME']=='localhost'){
+    $http="http:";
+} else {
+    $http="https:";
+};
+$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$url=explode("/",$actual_link); 
+$currentUrl = $url[0].'//'.$url[2].'/'.$url[3];
+$_SESSION["url"]=$currentUrl;
 ?>
     <!DOCTYPE html>
     <html lang="es">

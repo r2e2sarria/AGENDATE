@@ -205,7 +205,7 @@ bloque de turnos
 }
 
 .bloqueturnos>div {
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     width: 100%;
     margin-bottom: 5px;
@@ -215,21 +215,31 @@ bloque de turnos
     color: green;
 }
 
-.delturno {
-    cursor: pointer;
+.delturno,
+.delturnoget {
     color: var(--blueboton);
+}
+
+.delturnoget {
+    display: block;
+    width: 1.2em;
 }
 
 .delturno:hover {
     color: red;
 }
 
+
+/*
+VENTA DE LA CITA
+*/
+
 .reservado {
-    display: block;
-    width: 82%;
+    display: none;
+    width: 97% !important;
     min-height: 100px;
     margin-bottom: 5px;
-    margin-left: 55px;
+    margin-left: 0px;
     font-family: 'Nunito', sans-serif;
     border-width: 1px;
     border-style: solid;

@@ -1,7 +1,7 @@
 <?php
-// 
-// Pantalla de entrada al proceso de creacion de cita
-// 
+/*
+ Pantalla de entrada al proceso de creacion de cita
+*/ 
 include 'templates/head.php';
 ?>
 <div class="mainbox">
