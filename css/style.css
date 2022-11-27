@@ -259,6 +259,20 @@ VENTA DE LA CITA
     padding: 5PX;
 }
 
+#showerr {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: red;
+}
+
+#newcitablock img {
+    display: block;
+    width: 70%;
+    text-align: center;
+    margin: 20px auto 10px auto;
+}
+
 @media screen and (max-width:1024px) {}
 
 @media screen and (max-width:768px) {}

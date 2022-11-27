@@ -21,7 +21,7 @@
     <div class="tac pointer">
         <a href="perfil.php">
             <i class="fa-solid fa-user"></i>
-            <span class="fs04 tac">PROFILE</span>
+            <span class="fs04 tac">LOG</span>
         </a>
     </div>
 </div>

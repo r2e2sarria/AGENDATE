@@ -111,7 +111,7 @@ function cancelar(x) {
     });
 }
 
-// marcar una cita como AUSENTE 
+// marcar una cita como AUSENTE
 
 function ausente(x) {
     var id = x;
@@ -215,8 +215,31 @@ function enviarMensaje(x, t) {
     });
 }
 
+// Cuear una nueva cita por parte del asesor con consejero
 
-// // // // // // // // // // // 
+function crearCitas(x) {
+    var formData = new FormData($("form#newcita")[0]);
+    formData.append("id", x); // Id del consejero
+    $.ajax({
+        url: "util/crearCitas.php",
+        type: "POST",
+        data: formData,
+        async: false,
+        success: function(data) {
+            if (data == 0) {
+                $("#newcitablock").html('<img src="images/ok.png" alt="Sucessfull"><br><span class="block tac">Cita creada con exito!</span>');
+            } else {
+                $("#info").html(data);
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+    });
+    return false;
+}
+
+// // // // // // // // // // //
 
 function temp() {
     var estado = $("#estado").val();
