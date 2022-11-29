@@ -266,6 +266,7 @@ VENTA DE LA CITA
     color: red;
 }
 
+#showDatosReserva img,
 #newcitablock img {
     display: block;
     width: 70%;

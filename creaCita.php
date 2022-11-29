@@ -3,30 +3,30 @@
 // Pantalla de entrada al proceso de creacion de cita
 // 
 include 'templates/head.php';
+
+$currentUrl = $_SESSION["url"];
+
+$consejeros = json_decode(file_get_contents($currentUrl . "/ws/listaConsejeros.php"), true);
+
 ?>
 <div class="mainbox">
     <br>
     <?php include 'templates/leftHead.php'; ?>
+    <div id="showDatosReserva">
+    <label for="subtit">RESERVAR UNA CITA CON:</label>
+    <br>
+    <select name="idConsejero" id="idConsejero" onchange="cargaTurnosDisponibles()">
+        <option value="0">Seleccione el consejero</option>
+        <?php
+        for ($x = 0; $x < count($consejeros); $x++) {
+            echo '<option value="' . $consejeros[$x]['id'] . '">' . $consejeros[$x]['name'] . ' ' . $consejeros[$x]['last'] . '</option>';
+        }
+        ?>
+    </select>
+    <div id="mostrarTurnosDisponibles">
 
-    <label for="subtit">SELECCIONE LA CITA</label>
-    <form action="creaCitaPerInfo.php" method="post" class="mt40">
-        <select name="idConsejero" id="idConsejero">
-            <option value="">Consejero</option>
-        </select>
-        <div>
-            <label for="">Seleccione la Fecha</label>
-            <input type="date" name="fecha" id="fecha">
-        </div>
-        <div>
-            <label for="">Seleccione la Hora</label>
-            <input type="time" name="hora" id="hora">
-        </div>
-        <select name="tipo" id="tipo">
-            <option value="">Tipo de cita</option>
-        </select>
-        <br>
-        <input type="submit" class="botonAux_blue fs12 w70p botc" value="CONTINUAR">
-    </form>
+    </div>
+    </div>
     <br>
 
     <?php include 'templates/menu.php'; ?>

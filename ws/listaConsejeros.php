@@ -7,24 +7,11 @@ a partir de la fecha de hoy
 
 include "../config.php";
 
-$email = $_GET['email'];
-$phone = $_GET['phone'];
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sql = $con->prepare("SELECT
-	citas.*, 
-	consejero.`name`, 
-	consejero.last
+	consejero.*
 FROM
-	citas
-	INNER JOIN
-	consejero
-	ON 
-		citas.id_consejero = consejero.id
-WHERE
-	citas.email = '$email' AND
-	citas.phone = '$phone'");
+	consejero");
     $sql->execute();
     if ($sql->rowCount() < 1) {
         echo json_encode("error");

@@ -1,3 +1,4 @@
+package imgchofer;
 public void inicializar(){
     Pregunta p1= agregarPregunta("Sus ruedas deben estar mirando hacia adelante, a menos que?",Tipo_Pregunta.TEORICA);
     agregarRespuesta(null,"Esté esperando a dar la vuelta a la izquierda en un semáforo.",Tipo_Respuesta.INCORRECTA,p1);
@@ -75,4 +76,16 @@ public void inicializar(){
     agregarRespuesta("sobrecebra.jpeg",null,Tipo_Respuesta.INCORRECTA,p19);
     agregarRespuesta("peatones.jpeg",null,Tipo_Respuesta.INCORRECTO,p19);
     agregarRespuesta("escolares",null,Tipo_Respuesta.CORRECTO,p19);
+    Pregunta p20= agregarPregunta("Cual es la luz roja",Tipo_Pregunta.COGNITIVA);
+    agregarRespuesta("red.png",null,Tipo_Respuesta.CORRECTO,p20);
+    agregarRespuesta("yellow.png",null,Tipo_Respuesta.INCORRECTA,p20);
+    agregarRespuesta("green.png",null,Tipo_Respuesta.INCORRECTA,p20);
+    Pregunta p21= agregarPregunta("Cual es la luz verde",Tipo_Pregunta.COGNITIVA);
+    agregarRespuesta("red.png",null,Tipo_Respuesta.INCORRECTA,p21);
+    agregarRespuesta("yellow.png",null,Tipo_Respuesta.INCORRECTA,p21);
+    agregarRespuesta("green.png",null,Tipo_Respuesta.CORRECTO,p21);
+    Pregunta p22= agregarPregunta("Cual es la luz amarilla",Tipo_Pregunta.COGNITIVA);
+    agregarRespuesta("red.png",null,Tipo_Respuesta.INCORRECTA,p22);
+    agregarRespuesta("yellow.png",null,Tipo_Respuesta.CORRECTO,p22);
+    agregarRespuesta("green.png",null,Tipo_Respuesta.INCORRECTA,p22);
 }

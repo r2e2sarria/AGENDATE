@@ -8,7 +8,7 @@ function valmail() {
         jQuery("#errmail").css("color", "#A80521");
         jQuery("#userMail").css("color", "#A80521");
         jQuery("#userMail").css("border-color", "#A80521");
-        $("#errmail").html(" (Fromato de correo no valido) ");
+        $("#errmail").html(" (Formato de correo no valido) ");
     } else {
         jQuery("#errmail").css("color", "#069169");
         jQuery("#userMail").css("color", "#069169");
@@ -215,7 +215,43 @@ function enviarMensaje(x, t) {
     });
 }
 
-// Cuear una nueva cita por parte del asesor con consejero
+// Carga de los turnos diponibles de cada consejero
+
+function cargaTurnosDisponibles() {
+    var id = $("#idConsejero").val();
+    jQuery.ajax({
+        url: "util/cargaTurnosDisponibles.php",
+        type: "POST",
+        data: {
+            id: id,
+        },
+        success: function(data) {
+            // window.location.reload(true);
+            $("#mostrarTurnosDisponibles").html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Carga de la informacion para hacer la reserva de un turno
+
+function datosReservaTurno(x) {
+    var id = x;
+    jQuery.ajax({
+        url: "util/creaCitaPerInfo.php",
+        type: "POST",
+        data: {
+            id: id,
+        },
+        success: function(data) {
+            // window.location.reload(true);
+            $("#showDatosReserva").html(data);
+        },
+        error: function() {},
+    });
+}
+
+// Crear una nueva cita por parte del asesor con consejero
 
 function crearCitas(x) {
     var formData = new FormData($("form#newcita")[0]);
@@ -227,7 +263,9 @@ function crearCitas(x) {
         async: false,
         success: function(data) {
             if (data == 0) {
-                $("#newcitablock").html('<img src="images/ok.png" alt="Sucessfull"><br><span class="block tac">Cita creada con exito!</span>');
+                $("#newcitablock").html(
+                    '<img src="images/ok.png" alt="Sucessfull"><br><span class="block tac">Cita creada con exito!</span>'
+                );
             } else {
                 $("#info").html(data);
             }
@@ -239,19 +277,69 @@ function crearCitas(x) {
     return false;
 }
 
+// validación y carga de la cita
+
+function efectuarReserva() {
+    var formData = new FormData($("form#datosReserva")[0]);
+    $.ajax({
+        url: "util/efectuarReserva.php",
+        type: "POST",
+        data: formData,
+        async: false,
+        success: function(data) {
+            if (data == "0") {
+                $("#showerror").html("Información erronea");
+
+                function hideMsg() {
+                    $("#showerror").html("");
+                }
+                setTimeout(hideMsg, 3000);
+            } else {
+                $("#showDatosReserva").html(
+                    '<img src="images/ok.png" alt="Sucessfull"><br><span class="block tac">Cita reservada con exito!</span>'
+                );
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+    });
+    return false;
+}
+
+// funcion para consultar reservas de un usuario
+
+function mostrarReservas() {
+    var formData = new FormData($("form#consultar")[0]);
+    $.ajax({
+        url: "util/mostrarReservas.php",
+        type: "POST",
+        data: formData,
+        async: false,
+        success: function(data) {
+            $("#showCitasReservadas").html(data);
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+    });
+    return false;
+}
 // // // // // // // // // // //
 
-function temp() {
-    var estado = $("#estado").val();
-    jQuery.ajax({
-        url: "util/selectCiudad.php",
-        type: "POST",
-        data: {
-            estado: estado,
-        },
-        success: function(data) {
-            $("#selectCiudad").html(data);
-        },
-        error: function() {},
-    });
+function numeros(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = "1234567890";
+    especiales = [];
+
+    tecla_especial = false;
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) return false;
 }
