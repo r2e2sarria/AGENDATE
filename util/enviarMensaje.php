@@ -1,6 +1,6 @@
 <?php
 /*
- Script para hacer la transferencia a otro asesor o consejero
+ Script para enviar un mensaje
 */
 include "../config.php";
 

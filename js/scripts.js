@@ -215,6 +215,32 @@ function enviarMensaje(x, t) {
     });
 }
 
+// MENSAJE ADICONAL DEL USUARIO
+
+function mensajeAdicional(x, t) {
+    var id = x;
+    var type = t;
+    var memo = $("#mensajeAdicional").val();
+    jQuery.ajax({
+        url: "util/enviarMensaje.php",
+        type: "POST",
+        data: {
+            id: id,
+            type: type,
+            memo: memo,
+        },
+        success: function(data) {
+            // window.location.reload(true);
+            $("#msgServicio" + id).html("ENVIANDO EL MENSAJE");
+
+            function hideMsg() {
+                $("#msgServicio" + id).html(data);
+            }
+            setTimeout(hideMsg, 3000);
+        },
+        error: function() {},
+    });
+}
 // Carga de los turnos diponibles de cada consejero
 
 function cargaTurnosDisponibles() {

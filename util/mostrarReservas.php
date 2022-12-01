@@ -13,6 +13,8 @@ $email = $_POST['mail'];
 $phone = $_POST['phone'];
 
 $miscitas = json_decode(file_get_contents($currentUrl . "/ws/miscitas.php?email=" . $email  . "&phone=" . $phone . ""), true);
+// print"<pre>";
+// print_r($miscitas);
 if ($miscitas == 'error') {
     echo "Sin citas reservadas a la fecha";
 } else {
@@ -23,10 +25,11 @@ if ($miscitas == 'error') {
             <b>CONSEJERO: </b>' . $miscitas[$x]['name'] . ' ' . $miscitas[$x]['last'] . '
             <br><b>HORA: </b>' . $miscitas[$x]['time'] . ' <b>tiempo: </b>' . $miscitas[$x]['duracion'] . ' min.
             <br>
-            <textarea id="sendMensaje" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
+            <textarea id="mensajeAdicional" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
+            <div id="msgServicio'. $miscitas[$x]['id'].'" class="block w100p tac fs10"></div>
             <div class="col col-between fs07 mt10 mb10">
                 <div class="botonAux_blue" onclick="cancelar(' . $miscitas[$x]['id'] . ')">CANCELAR</div>
-                <div class="botonAux_blue" onclick="mensaje(' . $miscitas[$x]['id'] . ',2)">ENVIAR MENSAJE</div>
+                <div class="botonAux_blue" onclick="mensajeAdicional(' . $miscitas[$x]['id'] . ',2)">ENVIAR MENSAJE</div>
             </div> 
             </div>';
     }

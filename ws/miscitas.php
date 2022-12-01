@@ -24,7 +24,8 @@ FROM
 		citas.id_consejero = consejero.id
 WHERE
 	citas.email = '$email' AND
-	citas.phone = '$phone'");
+	citas.phone = '$phone' AND
+	citas.estado = '1'");
     $sql->execute();
     if ($sql->rowCount() < 1) {
         echo json_encode("error");
