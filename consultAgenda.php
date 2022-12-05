@@ -79,7 +79,7 @@ include 'templates/head.php';
                         <div id="botonesTurno">
                             <div class="col col-around fs07 mb10">';
                     if ($ctrl2 == 0) {
-                        echo  '<div class="botonAux_blue" onclick="transferir(' . $citas[$x]['id'] . ','.$_SESSION['id'].')">TRANSFERIR</div>
+                        echo  '<div class="botonAux_blue" onclick="transferir(' . $citas[$x]['id'] . ',' . $_SESSION['id'] . ')">TRANSFERIR</div>
                                 <div class="botonAux_blue" onclick="cancelar(' . $citas[$x]['id'] . ')">CANCELAR</div>';
                     }
                     echo '<div class="botonAux_blue" onclick="mensaje(' . $citas[$x]['id'] . ',2)">MENSAJE</div>
@@ -98,6 +98,41 @@ include 'templates/head.php';
                 ';
             }
             echo '</div>';
+            $torta = json_decode(file_get_contents($currentUrl . "/ws/torta.php?id=" . $id . ""),true);
+            $libre= $torta[0];
+            $ocupado=$torta[1];
+        ?>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Citas futuras'],
+                        ['Disponibles', <?php echo $libre;?>],
+                        ['Ocupados', <?php echo $ocupado;?>],
+                    ]);
+
+                    var options = {
+                        title: 'Estados de las citas por porcentaje'
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+            </head>
+
+            <body>
+                <div id="piechart" style="width: 400px; height: 200px;"></div>
+            </body>
+
+        <?php
         }
         ?>
 

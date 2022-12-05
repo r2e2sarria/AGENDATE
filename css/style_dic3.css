@@ -108,6 +108,12 @@ html {
     padding: 5px 10px;
 }
 
+.logo3 {
+    display: block;
+    width: 100px;
+    margin: 50px auto 0px auto;
+}
+
 .okpng {
     display: block;
     width: 120px;

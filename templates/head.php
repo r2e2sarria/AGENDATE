@@ -9,11 +9,12 @@ if (session_status() == PHP_SESSION_NONE) {
 if($_SERVER['SERVER_NAME']=='localhost'){
     $http="http:";
 } else {
-    $http="https:";
+    $http="http:";
 };
 $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $url=explode("/",$actual_link); 
 $currentUrl = $url[0].'//'.$url[2].'/'.$url[3];
+// $currentUrl = $url[0].'//'.$url[2];
 $_SESSION["url"]=$currentUrl;
 ?>
     <!DOCTYPE html>
@@ -29,7 +30,8 @@ $_SESSION["url"]=$currentUrl;
             rel="stylesheet" />
         <script src="https://kit.fontawesome.com/eacd406bb7.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/style.css">
+
+        <link rel="stylesheet" href="css/style_dic3.css">
         <script src="js/scripts.js"></script>
 
         <title>AGENDATE</title>

@@ -7,7 +7,7 @@ include "../config.php";
 
 $id=$_POST['id'];
 $sql = "UPDATE citas SET 	
-        estado='0'
+        estado='0',nombre=' ',apellido=' ',phone=' ',email=' '
         WHERE 
         id='$id'";
 $query = $con->prepare($sql);

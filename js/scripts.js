@@ -324,6 +324,7 @@ function efectuarReserva() {
                 $("#showDatosReserva").html(
                     '<img src="images/ok.png" alt="Sucessfull"><br><span class="block tac">Cita reservada con exito!</span>'
                 );
+                // $("#showDatosReserva").html(data);
             }
         },
         cache: false,

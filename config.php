@@ -9,7 +9,7 @@ if (gethostname() == "uscentral43.myserverhosts.com") {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'doo1_arturo');
     define('DB_PASS', 'Jasarria2017');
-    define('DB_NAME', 'doo1_UGPP-CITAS');
+    define('DB_NAME', 'doo1_agendate');
 } else {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
