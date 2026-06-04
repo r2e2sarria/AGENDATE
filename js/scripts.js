@@ -1,4 +1,5 @@
-// validador del formato de un campo de correo
+// version ajustada junio 2026 
+//validador del formato de un campo de correo
 
 function valmail() {
     const re =
