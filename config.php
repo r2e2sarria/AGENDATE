@@ -4,8 +4,7 @@
   Script para la apertura de la base de datos de acuerdo al
   servidor en donde se encuentre alojada la aplicación.
  */
-
-if (gethostname() == "uscentral43.myserverhosts.com") {
+if ($_SERVER['SERVER_ADDR'] == "143.95.247.240") {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'doo1_arturo');
     define('DB_PASS', 'Jasarria2017');
