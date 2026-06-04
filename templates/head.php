@@ -1,5 +1,6 @@
 <?php
 /* 
+// Actualización Junio 2026
  TOP INCLUYE HTMLT5
 */ 
 if (session_status() == PHP_SESSION_NONE) {

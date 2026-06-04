@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script para hacer la transferencia a otro asesor o consejero
 */
 include "../config.php";

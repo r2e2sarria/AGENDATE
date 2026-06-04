@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script para enviar un mensaje
 */
 include "../config.php";

@@ -1,4 +1,6 @@
 <?php
+// Actualización Junio 2026
+
 echo "PHP_SELF > ".$_SERVER['PHP_SELF'];
 echo "<br>";
 echo "SERVER_NAME > ".$_SERVER['SERVER_NAME'];

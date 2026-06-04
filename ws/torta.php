@@ -1,5 +1,6 @@
 <?php
 /* 
+// Actualización Junio 2026
 Torta de acuerdo al tipo de usuarios
 */
 

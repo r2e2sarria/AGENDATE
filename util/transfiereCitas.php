@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script pata TRANSFERIR una cita a
  otro asesor o consejero
 */

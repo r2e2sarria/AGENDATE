@@ -1,5 +1,7 @@
 <?php
  /*
+ // Actualización Junio 2026
+
   Script para obtener los parametos en el update
  */
  function getParams($input)

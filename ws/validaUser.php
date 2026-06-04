@@ -1,5 +1,6 @@
 <?php
 /* 
+// Actualización Junio 2026
 Servicio para la validación de Usuario
 */
 

@@ -1,5 +1,7 @@
 <?php
 /*
+// Actualización Junio 2026
+
  Pantalla de entrada al proceso de creacion de cita
 */ 
 include 'templates/head.php';

@@ -1,5 +1,6 @@
 <?php
 /* 
+// Actualización Junio 2026
 Listado de citas de un consejero
 a partir de la fecha de hoy
 

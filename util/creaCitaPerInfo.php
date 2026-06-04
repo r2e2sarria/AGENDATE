@@ -1,5 +1,6 @@
 <?php
 // 
+// Actualización Junio 2026
 // Pantalla de entrada al proceso de creacion de cita
 // 
 $id = $_POST['id'];

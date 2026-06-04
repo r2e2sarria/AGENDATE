@@ -1,5 +1,6 @@
 <?php
 /* 
+// Actualización Junio 2026
 Encuentra el detalle de una cita por el codigo de la cita
 */
 

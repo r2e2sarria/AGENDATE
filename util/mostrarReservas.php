@@ -1,6 +1,7 @@
 <?php
 /*
 
+// Actualización Junio 2026
 Script para consultar y publicar las citas reservadfas
 por un usuario.
 

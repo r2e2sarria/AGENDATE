@@ -1,6 +1,6 @@
 <?php 
 /*
-
+// Actualización Junio 2026
 Script para la carga de la reserva y validacion de los datos
 
 */

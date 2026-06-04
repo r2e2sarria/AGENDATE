@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
 Validación del consejero
 ejecutado por la función /js/script.js/validaConsejero() 
 */

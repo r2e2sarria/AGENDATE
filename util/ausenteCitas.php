@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script para marca la USENCIA a una cita 
  desde el id de la misma.
 */

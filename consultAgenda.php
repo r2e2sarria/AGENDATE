@@ -1,5 +1,7 @@
 <?php
 /*
+// Actualización Junio 2026
+
     Diplay de todas las citas por consejero desde
     la fecha actual
 */

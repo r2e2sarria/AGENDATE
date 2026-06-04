@@ -1,6 +1,8 @@
 <?php
 
  /*
+ // Actualización Junio 2026
+
   Script para la apertura de la base de datos de acuerdo al
   servidor en donde se encuentre alojada la aplicación.
  */

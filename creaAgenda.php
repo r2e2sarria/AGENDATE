@@ -1,5 +1,7 @@
 <?php
 /* 
+// Actualización Junio 2026
+
   Formulario para la creación de un cita por parte del asesor o consejero
 */
 if (session_status() == PHP_SESSION_NONE) {

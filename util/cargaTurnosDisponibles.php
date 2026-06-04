@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script para cargar , deplegar y escoger los turnos disponibles
  por cada consejero
 */

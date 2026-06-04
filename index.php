@@ -1,4 +1,6 @@
 <?php
+// Actualización Junio 2026
+
 include 'templates/head.php';
 ?>
 <div class="mainbox">

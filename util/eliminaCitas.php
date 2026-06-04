@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
  Script para la eliminacion de una cita
 */
 include "../config.php";

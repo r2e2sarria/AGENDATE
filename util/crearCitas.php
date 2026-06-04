@@ -1,5 +1,6 @@
 <?php
 /*
+// Actualización Junio 2026
     Script para la validación y carga de un cita.
 */
 if (session_status() == PHP_SESSION_NONE) {
