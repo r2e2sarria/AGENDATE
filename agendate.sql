@@ -1,4 +1,3 @@
--- version ajustada junio 2026
 
 CREATE TABLE `citas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

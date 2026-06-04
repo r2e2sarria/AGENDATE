@@ -1,0 +1,41 @@
+services:
+  agendate_app:
+    build: .
+    container_name: agendate_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - agendate_db
+
+  agendate_db:
+    image: mysql:8.0
+    container_name: agendate_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: agendate
+      MYSQL_USER: agendate_user
+      MYSQL_PASSWORD: agendate_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - agendate_mysql_data:/var/lib/mysql
+      - ./agendate.sql:/docker-entrypoint-initdb.d/agendate.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
+    container_name: agendate_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: agendate_db
+      PMA_PORT: 3306
+    depends_on:
+      - agendate_db
+
+volumes:
+  agendate_mysql_data:
