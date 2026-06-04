@@ -6,8 +6,14 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/html
+    environment:
+      DB_HOST: agendate_db
+      DB_USER: agendate_user
+      DB_PASS: agendate_pass
+      DB_NAME: agendate
     depends_on:
-      - agendate_db
+      agendate_db:
+        condition: service_healthy
 
   agendate_db:
     image: mysql:8.0
@@ -19,10 +25,15 @@ services:
       MYSQL_USER: agendate_user
       MYSQL_PASSWORD: agendate_pass
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - agendate_mysql_data:/var/lib/mysql
       - ./agendate.sql:/docker-entrypoint-initdb.d/agendate.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -34,8 +45,10 @@ services:
     environment:
       PMA_HOST: agendate_db
       PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: http://localhost:8081/
     depends_on:
-      - agendate_db
+      agendate_db:
+        condition: service_healthy
 
 volumes:
   agendate_mysql_data:

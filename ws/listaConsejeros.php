@@ -6,7 +6,7 @@ a partir de la fecha de hoy
 
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sql = $con->prepare("SELECT
