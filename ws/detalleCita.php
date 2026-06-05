@@ -1,29 +1,37 @@
 <?php
 /* 
 // Actualización Junio 2026
-Encuentra el detalle de una cita por el codigo de la cita
+Encuentra los memos asociados a una cita por el código de la cita
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
-$id=$_GET['id'];
+header('Content-Type: application/json; charset=utf-8');
+
+$id = $_GET['id'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	memos.*
-FROM
-	memos
-WHERE
-	memos.id_cita = '$id'");
+
+    $sql = $con->prepare("
+        SELECT
+            memos.*
+        FROM
+            memos
+        WHERE
+            memos.id_cita = :id
+    ");
+
+    $sql->bindParam(':id', $id, PDO::PARAM_INT);
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$resultado) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
-
-

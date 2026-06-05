@@ -1,41 +1,63 @@
-<?php 
+<?php
 /*
-// Actualización Junio 2026
-Script para la carga de la reserva y validacion de los datos
-
+ // Actualización Junio 2026
+ Script para la carga de la reserva y validación de los datos
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
+
 $data = $_POST;
-print_r($data);
-$err=0;
-if(strlen($data['nombre'])<2 or strlen($data['apellido'])<2 or strlen($data['phone'])<10){
-    $err=0;echo $err;
-    exit();
-} else {
-    $nombre=$data['nombre'];
-    $apellido=$data['apellido'];
-    $dob=$data['dob'];
-    $phone=$data['phone'];
-    $id=$data['id'];
-    $estado=$data['estado'];
-    $email=$data['email'];
-    $sql = "UPDATE citas SET 	
-        nombre='$nombre',apellido='$apellido',email='$email',dob='$dob',phone='$phone',estado='$estado'
-        WHERE 
-        id='$id'";
-    $query = $con->prepare($sql);
-    $query->execute();
-     $arr = $query->errorInfo();
-    print_r($arr);
-    if(strlen($data['motivo'])>2){
-        $memo = $data['motivo'];
-        $sql = "INSERT INTO memos (id_cita,memo,tipo_nota) value ('$id','$memo','1')";
-        $query = $con->prepare($sql);
-        $query->execute();
-    }
-    $err=1;echo $err;
+
+$nombre   = trim($data['nombre'] ?? '');
+$apellido = trim($data['apellido'] ?? '');
+$dob      = $data['dob'] ?? '';
+$phone    = trim($data['phone'] ?? '');
+$id       = $data['id'] ?? '';
+$estado   = $data['estado'] ?? 1;
+$email    = trim($data['email'] ?? '');
+$motivo   = trim($data['motivo'] ?? '');
+
+if (strlen($nombre) < 2 || strlen($apellido) < 2 || strlen($phone) < 10 || empty($id)) {
+    echo "0";
     exit();
 }
 
+$sql = $con->prepare("
+    UPDATE citas
+    SET
+        nombre = :nombre,
+        apellido = :apellido,
+        email = :email,
+        dob = :dob,
+        phone = :phone,
+        estado = :estado
+    WHERE
+        id = :id
+");
 
+$sql->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+$sql->bindParam(':apellido', $apellido, PDO::PARAM_STR);
+$sql->bindParam(':email', $email, PDO::PARAM_STR);
+$sql->bindParam(':dob', $dob, PDO::PARAM_STR);
+$sql->bindParam(':phone', $phone, PDO::PARAM_STR);
+$sql->bindParam(':estado', $estado, PDO::PARAM_INT);
+$sql->bindParam(':id', $id, PDO::PARAM_INT);
+
+$sql->execute();
+
+if (strlen($motivo) > 2) {
+    $sql = $con->prepare("
+        INSERT INTO memos
+            (id_cita, memo, tipo_nota)
+        VALUES
+            (:id_cita, :memo, 1)
+    ");
+
+    $sql->bindParam(':id_cita', $id, PDO::PARAM_INT);
+    $sql->bindParam(':memo', $motivo, PDO::PARAM_STR);
+
+    $sql->execute();
+}
+
+echo "1";
+exit();

@@ -3,34 +3,44 @@
 // Actualización Junio 2026
 Listado de citas de un consejero
 a partir de la fecha de hoy
-
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
-$id=$_GET['id'];
-$hoy=date("Y-m-d");
+header('Content-Type: application/json; charset=utf-8');
+
+$id  = $_GET['id'] ?? '';
+$hoy = date("Y-m-d");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	citas.*
-FROM
-	citas
-WHERE
-	citas.id_consejero = '$id' AND
-	citas.date >= '$hoy'
-ORDER BY
-	citas.date ASC, 
-	citas.time ASC");
+
+    $sql = $con->prepare("
+        SELECT
+            citas.*
+        FROM
+            citas
+        WHERE
+            citas.id_consejero = :id
+            AND citas.date >= :hoy
+        ORDER BY
+            citas.date ASC,
+            citas.time ASC
+    ");
+
+    $sql->bindParam(':id', $id, PDO::PARAM_INT);
+    $sql->bindParam(':hoy', $hoy, PDO::PARAM_STR);
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$resultado) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
 
 

@@ -1,40 +1,45 @@
 <?php
 /* 
 // Actualización Junio 2026
-Listado de citas de un consejero
-a partir de la fecha de hoy
-
+Listado de citas atendidas de un usuario
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
-$email = $_GET['email'];
-$phone = $_GET['phone'];
+header('Content-Type: application/json; charset=utf-8');
 
+$email = $_GET['email'] ?? '';
+$phone = $_GET['phone'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	citas.*, 
-	consejero.`name`, 
-	consejero.last
-FROM
-	citas
-	INNER JOIN
-	consejero
-	ON 
-		citas.id_consejero = consejero.id
-WHERE
-	citas.email = '$email' AND
-	citas.phone = '$phone' AND
-	citas.estado = '1'");
+
+    $sql = $con->prepare("
+        SELECT
+            citas.*, 
+            consejero.`name`, 
+            consejero.last
+        FROM
+            citas
+        INNER JOIN consejero
+            ON citas.id_consejero = consejero.id
+        WHERE
+            citas.email = :email
+            AND citas.phone = :phone
+            AND citas.estado = 1
+    ");
+
+    $sql->bindParam(':email', $email, PDO::PARAM_STR);
+    $sql->bindParam(':phone', $phone, PDO::PARAM_STR);
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
-

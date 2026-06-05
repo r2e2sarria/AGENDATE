@@ -1,68 +1,79 @@
 <?php
 /*
-// Actualización Junio 2026
-    Script para la validación y carga de un cita.
+ // Actualización Junio 2026
+ Script para la validación y carga de una cita.
 */
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (!isset($_SESSION['log']) or $_SESSION['log'] != 'on') {
-    header("Location: perfil.php");
-}
-include "../config.php";
 
-$currentUrl = $_SESSION["url"];
-$id = $_SESSION['id'];
-$errores = array("", "Entre la Fecha Válida", "Entre la Hora", "Entre la Duración", "Seleccione el tipo de cita");
+if (!isset($_SESSION['log']) || $_SESSION['log'] != 'on') {
+    header("Location: ../perfil.php");
+    exit();
+}
+
+require_once __DIR__ . "/../config.php";
+
+$errores = [
+    "",
+    "Entre la Fecha Válida",
+    "Entre la Hora",
+    "Entre la Duración",
+    "Seleccione el tipo de cita"
+];
+
 $err = 0;
-// print "<pre>";
-// print_r($_POST);
-if (strlen($_POST['fecha'] < 1)) {
+
+$fecha = $_POST['fecha'] ?? '';
+$hora  = $_POST['hora'] ?? '';
+$min   = $_POST['min'] ?? 0;
+$tipo  = $_POST['tipo'] ?? 0;
+$id    = $_POST['id'] ?? '';
+$meet  = $_POST['meet'] ?? '';
+
+if (strlen($fecha) < 1) {
     $err = 1;
-} else {
-    $fecha = $_POST['fecha'];
-}
-if (strlen($_POST['hora'] < 1)) {
+} elseif (strlen($hora) < 1) {
     $err = 2;
-} else {
-   $hora= $_POST['hora'];
-}
-if ($_POST['min'] < 20) {
+} elseif ((int)$min < 20) {
     $err = 3;
-} else {
-    $min=$_POST['min'];
-}
-if ($_POST['tipo'] == 0) {
+} elseif ((int)$tipo == 0) {
     $err = 4;
-} else {
-    $tipo=$_POST['tipo'];
 }
-switch ($err) {
-    case '4':
-        echo '<script>$("#showerr").html("' . $errores[4] . '");</script>';
-        break;
-    case '3':
-        echo '<script>$("#showerr").html("' . $errores[3] . '");</script>';
-        break;
-    case '2':
-        echo '<script>$("#showerr").html("' . $errores[2] . '");</script>';
-        break;
-    case '1':
-        echo '<script>$("#showerr").html("' . $errores[1] . '");</script>';
-        break;
-    case '0':
-    $id=$_POST['id'];
-    $meet=$_POST['meet'];
-    $sql = "INSERT INTO citas (id_consejero,date,time,tipo,duracion,estado) value ('$id','$fecha','$hora','$tipo','$min','0')";
-    $query = $con->prepare($sql);
-    $query->execute();
-    // $arr = $query->errorInfo();
-    // print_r($arr);
-    if(strlen($meet)>10){
-    $sql = "UPDATE consejero SET meet='$meet' WHERE id='$id'";
-    $query = $con->prepare($sql);
-    $query->execute();
-    }
-    echo $err;
-    break;
+
+if ($err > 0) {
+    echo '<script>$("#showerr").html("' . $errores[$err] . '");</script>';
+    exit();
 }
+
+$sql = $con->prepare("
+    INSERT INTO citas
+        (id_consejero, date, time, tipo, duracion, estado)
+    VALUES
+        (:id_consejero, :fecha, :hora, :tipo, :duracion, 0)
+");
+
+$sql->bindParam(':id_consejero', $id, PDO::PARAM_INT);
+$sql->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+$sql->bindParam(':hora', $hora, PDO::PARAM_STR);
+$sql->bindParam(':tipo', $tipo, PDO::PARAM_INT);
+$sql->bindParam(':duracion', $min, PDO::PARAM_INT);
+
+$sql->execute();
+
+if (strlen($meet) > 10) {
+    $sql = $con->prepare("
+        UPDATE consejero
+        SET meet = :meet
+        WHERE id = :id
+    ");
+
+    $sql->bindParam(':meet', $meet, PDO::PARAM_STR);
+    $sql->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $sql->execute();
+}
+
+echo "0";
+exit();

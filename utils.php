@@ -1,26 +1,34 @@
 <?php
- /*
- // Actualización Junio 2026
+/*
+ Actualización Junio 2026
+ Funciones auxiliares para PDO
+*/
 
-  Script para obtener los parametos en el update
+/**
+ * Genera los parámetros para un UPDATE
+ *
+ * Ejemplo:
+ * nombre=:nombre, email=:email
  */
- function getParams($input)
- {
+function getParams(array $input): string
+{
     $filterParams = [];
-    foreach($input as $param => $value)
-    {
-            $filterParams[] = "$param=:$param";
-    }
-    return implode(", ", $filterParams);
-	}
 
-  //Asociar todos los parametros a un sql
-	function bindAllValues($statement, $params)
-  {
-		foreach($params as $param => $value)
-    {
-				$statement->bindValue(':'.$param, $value);
-		}
-		return $statement;
-   }
- ?>
+    foreach ($input as $param => $value) {
+        $filterParams[] = "{$param}=:{$param}";
+    }
+
+    return implode(', ', $filterParams);
+}
+
+/**
+ * Asocia todos los parámetros a una sentencia PDO
+ */
+function bindAllValues(PDOStatement $statement, array $params): PDOStatement
+{
+    foreach ($params as $param => $value) {
+        $statement->bindValue(':' . $param, $value);
+    }
+
+    return $statement;
+}

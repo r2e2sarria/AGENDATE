@@ -1,30 +1,40 @@
 <?php
 /* 
 // Actualización Junio 2026
-Encuentra el detalle de una cita por el codigo de la cita
+Encuentra las citas activas de un consejero
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
-$id=$_GET['id'];
+header('Content-Type: application/json; charset=utf-8');
+
+$id = $_GET['id'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	citas.*
-FROM
-	citas
-WHERE
-	citas.id_consejero = '$id' AND
-	citas.estado = '0'");
+
+    $sql = $con->prepare("
+        SELECT
+            citas.*
+        FROM
+            citas
+        WHERE
+            citas.id_consejero = :id
+            AND citas.estado = 0
+    ");
+
+    $sql->bindParam(':id', $id, PDO::PARAM_INT);
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$resultado) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
 
 

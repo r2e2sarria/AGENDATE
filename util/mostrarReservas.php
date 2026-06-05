@@ -1,37 +1,61 @@
 <?php
 /*
-
 // Actualización Junio 2026
-Script para consultar y publicar las citas reservadfas
+Script para consultar y publicar las citas reservadas
 por un usuario.
-
 */
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$currentUrl = $_SESSION["url"];
-$email = $_POST['mail'];
-$phone = $_POST['phone'];
 
-$miscitas = json_decode(file_get_contents($currentUrl . "/ws/miscitas.php?email=" . $email  . "&phone=" . $phone . ""), true);
-// print"<pre>";
-// print_r($miscitas);
-if ($miscitas == 'error') {
-    echo "Sin citas reservadas a la fecha";
+$email = $_POST['mail'] ?? '';
+$phone = $_POST['phone'] ?? '';
+
+$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'];
+
+if ($host == 'localhost:8080') {
+    $baseUrl = "http://127.0.0.1";
+} elseif ($host == 'localhost') {
+    $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
 } else {
-    echo '<label for="subtit" class="mb20">LISTADO DE CITAS RESERVADAS</label>';
-    for ($x = 0; $x < count($miscitas); $x++) {
-        echo '   <div class="ml60 mt10">
-            <br><b>FECHA: </b>' . $miscitas[$x]['date'] . '<br>
-            <b>CONSEJERO: </b>' . $miscitas[$x]['name'] . ' ' . $miscitas[$x]['last'] . '
-            <br><b>HORA: </b>' . $miscitas[$x]['time'] . ' <b>tiempo: </b>' . $miscitas[$x]['duracion'] . ' min.
-            <br>
-            <textarea id="mensajeAdicional" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
-            <div id="msgServicio'. $miscitas[$x]['id'].'" class="block w100p tac fs10"></div>
-            <div class="col col-between fs07 mt10 mb10">
-                <div class="botonAux_blue" onclick="cancelar(' . $miscitas[$x]['id'] . ')">CANCELAR</div>
-                <div class="botonAux_blue" onclick="mensajeAdicional(' . $miscitas[$x]['id'] . ',2)">ENVIAR MENSAJE</div>
-            </div> 
-            </div>';
-    }
+    $baseUrl = $protocolo . "://" . $host;
 }
+
+$url = $baseUrl . "/ws/miscitas.php?email=" . urlencode($email) . "&phone=" . urlencode($phone);
+
+$miscitas = json_decode(file_get_contents($url), true);
+
+if ($miscitas == 'error' || empty($miscitas) || !is_array($miscitas)) {
+    echo "Sin citas reservadas a la fecha";
+    exit();
+}
+
+echo '<label for="subtit" class="mb20">LISTADO DE CITAS RESERVADAS</label>';
+
+foreach ($miscitas as $cita) {
+    $id = (int) $cita['id'];
+    $fecha = htmlspecialchars($cita['date']);
+    $nombre = htmlspecialchars($cita['name']);
+    $apellido = htmlspecialchars($cita['last']);
+    $hora = htmlspecialchars($cita['time']);
+    $duracion = htmlspecialchars($cita['duracion']);
+
+    echo '
+    <div class="ml60 mt10">
+        <br><b>FECHA: </b>' . $fecha . '<br>
+        <b>CONSEJERO: </b>' . $nombre . ' ' . $apellido . '
+        <br><b>HORA: </b>' . $hora . ' <b>tiempo: </b>' . $duracion . ' min.
+        <br>
+        <textarea id="mensajeAdicional" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
+        <div id="msgServicio' . $id . '" class="block w100p tac fs10"></div>
+
+        <div class="col col-between fs07 mt10 mb10">
+            <div class="botonAux_blue" onclick="cancelar(' . $id . ')">CANCELAR</div>
+            <div class="botonAux_blue" onclick="mensajeAdicional(' . $id . ',2)">ENVIAR MENSAJE</div>
+        </div>
+    </div>';
+}
+
+exit();

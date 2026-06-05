@@ -1,27 +1,35 @@
 <?php
 /* 
 // Actualización Junio 2026
-Listado de citas de un consejero
-a partir de la fecha de hoy
-
+Listado de consejeros
 */
 
 require_once __DIR__ . "/../config.php";
 
+header('Content-Type: application/json; charset=utf-8');
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	consejero.*
-FROM
-	consejero");
+
+    $sql = $con->prepare("
+        SELECT
+            consejero.*
+        FROM
+            consejero
+        ORDER BY
+            name,
+            last
+    ");
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
-
 

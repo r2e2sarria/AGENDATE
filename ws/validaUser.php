@@ -4,28 +4,40 @@
 Servicio para la validación de Usuario
 */
 
-include "../config.php";
+require_once __DIR__ . "/../config.php";
 
-$mail=$_GET['mail'];
-$pass=$_GET['pass'];
+header('Content-Type: application/json; charset=utf-8');
+
+$mail = $_GET['mail'] ?? '';
+$pass = $_GET['pass'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $sql = $con->prepare("SELECT
-	consejero.*
-FROM
-	consejero
-WHERE
-	consejero.mail = '$mail' AND
-	consejero.pass = '$pass'");
+
+    $sql = $con->prepare("
+        SELECT
+            consejero.*
+        FROM
+            consejero
+        WHERE
+            consejero.mail = :mail
+            AND consejero.pass = :pass
+        LIMIT 1
+    ");
+
+    $sql->bindParam(':mail', $mail, PDO::PARAM_STR);
+    $sql->bindParam(':pass', $pass, PDO::PARAM_STR);
+
     $sql->execute();
-    if ($sql->rowCount() < 1) {
+
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
-    header("HTTP/1.1 200 OK");
-    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+
+    echo json_encode($resultado);
     exit();
 }
-
 
 
