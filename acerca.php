@@ -18,7 +18,7 @@ include 'templates/head.php';
 
     <div class="w70p centrar ml60 fs09">
         <p>
-            Este sitio fue creado como parte de la materia de Integración Continua 2026,
+            Este sitio fue creado como parte de la materia de Integración Continua [GRUPO B03] [Sub Grupo 9],
             de la Facultad de Ingeniería de Software del
             <b>Politécnico Grancolombiano Institución Universitaria</b>,
             bajo la tutoría del profesor JESUS FIGUEROA GUERRERO, por los estudiantes:
