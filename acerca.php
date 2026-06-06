@@ -21,7 +21,7 @@ include 'templates/head.php';
             Este sitio fue creado como parte de la materia de Integración Continua 2026,
             de la Facultad de Ingeniería de Software del
             <b>Politécnico Grancolombiano Institución Universitaria</b>,
-            bajo la tutoría de la profesora Natalia Martínez, por los estudiantes:
+            bajo la tutoría del profesor JESUS FIGUEROA GUERRERO, por los estudiantes:
         </p>
 
         <div class="tac fs08">

@@ -6,16 +6,16 @@
 
 include 'templates/head.php';
 
-$baseUrl = $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-if (empty($baseUrl)) {
-    $consejeros = [];
-} else {
-    $jsonConsejeros = @file_get_contents($baseUrl . "/ws/listaConsejeros.php");
-    $consejeros = json_decode($jsonConsejeros, true);
+$consejeros = [];
 
-    if (!is_array($consejeros)) {
-        $consejeros = [];
+if (!empty($serviceUrl)) {
+    $jsonConsejeros = @file_get_contents($serviceUrl . "/ws/listaConsejeros.php");
+    $data = json_decode($jsonConsejeros, true);
+
+    if (is_array($data)) {
+        $consejeros = $data;
     }
 }
 ?>
