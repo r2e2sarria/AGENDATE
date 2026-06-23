@@ -18,27 +18,23 @@ include 'templates/head.php';
 $id = $_SESSION['id'] ?? 0;
 $id = (int) $id;
 
-$baseUrl = $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-if (empty($baseUrl)) {
-    $protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-    $host = $_SERVER['HTTP_HOST'];
+$citas = [];
+$err = 0;
 
-    if ($host == 'localhost:8080') {
-        $baseUrl = "http://127.0.0.1";
-    } elseif ($host == 'localhost') {
-        $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
+if (empty($serviceUrl) || $id <= 0) {
+    $err = 1;
+} else {
+    $jsonCitas = @file_get_contents($serviceUrl . "/ws/citasXconsejero.php?id=" . urlencode($id));
+    $dataCitas = json_decode($jsonCitas, true);
+
+    if ($jsonCitas === false || $dataCitas == "error" || empty($dataCitas) || !is_array($dataCitas)) {
+        $err = 1;
     } else {
-        $baseUrl = $protocolo . "://" . $host;
+        $citas = $dataCitas;
     }
 }
-
-$citas = json_decode(
-    file_get_contents($baseUrl . "/ws/citasXconsejero.php?id=" . urlencode($id)),
-    true
-);
-
-$err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
 ?>
 
 <div class="mainbox">
@@ -52,7 +48,7 @@ $err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
         <?php if ($err == 1): ?>
 
             <div class="tac mt20">
-                <?php echo htmlspecialchars($_SESSION['name'] ?? 'El consejero'); ?> no tiene citas programadas.
+                <?php echo htmlspecialchars($_SESSION['name'] ?? 'El consejero', ENT_QUOTES, 'UTF-8'); ?> no tiene citas programadas.
             </div>
 
         <?php else: ?>
@@ -62,8 +58,8 @@ $err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
                 <?php foreach ($citas as $cita): ?>
 
                     <?php
-                    $citaId = (int) $cita['id'];
-                    $estado = (int) $cita['estado'];
+                    $citaId = (int)($cita['id'] ?? 0);
+                    $estado = (int)($cita['estado'] ?? 0);
 
                     $ctrl1 = 0;
                     $ctrl2 = 0;
@@ -98,8 +94,8 @@ $err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
 
                         <?php endif; ?>
 
-                        <div><?php echo htmlspecialchars($cita['date']); ?></div>
-                        <div><?php echo htmlspecialchars($cita['time']); ?></div>
+                        <div><?php echo htmlspecialchars($cita['date'] ?? '', ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div><?php echo htmlspecialchars($cita['time'] ?? '', ENT_QUOTES, 'UTF-8'); ?></div>
 
                         <?php if ($ctrl1 != 1): ?>
                             <div class="delturno pointer" onclick="eliminar(<?php echo $citaId; ?>)">
@@ -114,34 +110,38 @@ $err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
                     <?php if ($ctrl1 == 1): ?>
 
                         <?php
-                        $detalle = json_decode(
-                            file_get_contents($baseUrl . "/ws/detalleCita.php?id=" . urlencode($citaId)),
-                            true
-                        );
+                        $memo = "Cita sin nota anexa.";
 
-                        if ($detalle == 'error' || empty($detalle) || !is_array($detalle)) {
-                            $memo = "Cita sin nota anexa.";
-                        } else {
+                        $jsonDetalle = @file_get_contents($serviceUrl . "/ws/detalleCita.php?id=" . urlencode($citaId));
+                        $detalle = json_decode($jsonDetalle, true);
+
+                        if ($jsonDetalle !== false && $detalle != 'error' && !empty($detalle) && is_array($detalle)) {
                             $memo = $detalle[0]['memo'] ?? "Cita sin nota anexa.";
                         }
                         ?>
 
                         <div class="reservado" id="reservado<?php echo $citaId; ?>">
                             <div class="col col-around mt10">
-                                <div><?php echo htmlspecialchars($cita['date']); ?></div>
-                                <div><?php echo htmlspecialchars($cita['time']); ?></div>
+                                <div><?php echo htmlspecialchars($cita['date'] ?? '', ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div><?php echo htmlspecialchars($cita['time'] ?? '', ENT_QUOTES, 'UTF-8'); ?></div>
                             </div>
 
                             <div class="pa10">
                                 <span>
                                     <b>
-                                        <?php echo htmlspecialchars(($cita['nombre'] ?? '') . ' ' . ($cita['apellido'] ?? '')); ?>
+                                        <?php
+                                        echo htmlspecialchars(
+                                            ($cita['nombre'] ?? '') . ' ' . ($cita['apellido'] ?? ''),
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        );
+                                        ?>
                                     </b>
                                 </span>
                                 <br>
 
                                 <span class="block fs08 mt10">
-                                    <?php echo htmlspecialchars($memo); ?>
+                                    <?php echo htmlspecialchars($memo, ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </div>
 
@@ -173,13 +173,16 @@ $err = ($citas == "error" || empty($citas) || !is_array($citas)) ? 1 : 0;
             </div>
 
             <?php
-            $torta = json_decode(
-                file_get_contents($baseUrl . "/ws/torta.php?id=" . urlencode($id)),
-                true
-            );
+            $libre = 0;
+            $ocupado = 0;
 
-            $libre = $torta[0] ?? 0;
-            $ocupado = $torta[1] ?? 0;
+            $jsonTorta = @file_get_contents($serviceUrl . "/ws/torta.php?id=" . urlencode($id));
+            $torta = json_decode($jsonTorta, true);
+
+            if ($jsonTorta !== false && is_array($torta)) {
+                $libre = (int)($torta[0] ?? 0);
+                $ocupado = (int)($torta[1] ?? 0);
+            }
             ?>
 
             <div id="piechart" style="width: 400px; height: 200px;"></div>

@@ -1,18 +1,22 @@
 <?php
 /* 
 // Actualización Junio 2026
-Listado de citas de un consejero
-a partir de la fecha de hoy
+Listado de citas de un usuario por email y teléfono
 */
 
 require_once __DIR__ . "/../config.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
-$email = $_GET['email'] ?? '';
-$phone = $_GET['phone'] ?? '';
+$email = trim($_GET['email'] ?? '');
+$phone = trim($_GET['phone'] ?? '');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    if (empty($email) || empty($phone)) {
+        echo json_encode("error");
+        exit();
+    }
 
     $sql = $con->prepare("
         SELECT
@@ -26,16 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         WHERE
             citas.email = :email
             AND citas.phone = :phone
+        ORDER BY
+            citas.date ASC,
+            citas.time ASC
     ");
 
-    $sql->bindParam(':email', $email, PDO::PARAM_STR);
-    $sql->bindParam(':phone', $phone, PDO::PARAM_STR);
+    $sql->bindValue(':email', $email, PDO::PARAM_STR);
+    $sql->bindValue(':phone', $phone, PDO::PARAM_STR);
 
     $sql->execute();
 
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$resultado) {
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
@@ -43,5 +50,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     echo json_encode($resultado);
     exit();
 }
-
-

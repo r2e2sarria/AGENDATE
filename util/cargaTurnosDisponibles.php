@@ -10,40 +10,48 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 $id = $_POST['id'] ?? '';
+$id = (int)$id;
 
-if (empty($id)) {
+if ($id <= 0) {
     echo "<div class='ml60 mb10'>No se recibió el consejero</div>";
     exit();
 }
 
-$tipo = ["", "Presencial", "Virtual"];
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-$host = $_SERVER['HTTP_HOST'];
-
-if ($host == 'localhost:8080') {
-    $baseUrl = "http://127.0.0.1";
-} elseif ($host == 'localhost') {
-    $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
-} else {
-    $baseUrl = $protocolo . "://" . $host;
+if (empty($serviceUrl)) {
+    echo "<div class='ml60 mb10'>No se pudo detectar la URL del servicio</div>";
+    exit();
 }
 
-$jsonTurnos = file_get_contents($baseUrl . "/ws/cargaTurnosConsejero.php?id=" . urlencode($id));
+$tipo = [
+    1 => "Presencial",
+    2 => "Virtual",
+    3 => "Telefónica"
+];
+
+$url = $serviceUrl . "/ws/cargaTurnosConsejero.php?id=" . urlencode($id);
+
+$jsonTurnos = @file_get_contents($url);
+
+if ($jsonTurnos === false) {
+    echo "<div class='ml60 mb10'>No se pudo consultar el servicio de turnos</div>";
+    exit();
+}
+
 $turnos = json_decode($jsonTurnos, true);
 
 if ($turnos == 'error' || empty($turnos) || !is_array($turnos)) {
-    echo "<div class='ml60 mb10'>";
-    echo "Sin turnos disponibles";
-    echo "</div>";
+    echo "<div class='ml60 mb10'>Sin turnos disponibles</div>";
     exit();
 }
 
 foreach ($turnos as $turno) {
-    $idTurno = htmlspecialchars($turno['id']);
-    $fecha = htmlspecialchars($turno['date']);
-    $hora = htmlspecialchars($turno['time']);
-    $tipoTurno = $tipo[$turno['tipo']] ?? 'Sin tipo';
+    $idTurno = (int)($turno['id'] ?? 0);
+    $fecha = htmlspecialchars($turno['date'] ?? '', ENT_QUOTES, 'UTF-8');
+    $hora = htmlspecialchars($turno['time'] ?? '', ENT_QUOTES, 'UTF-8');
+    $tipoId = (int)($turno['tipo'] ?? 0);
+    $tipoTurno = $tipo[$tipoId] ?? 'Sin tipo';
 
     echo "<div class='ml60 mb10'>";
     echo '<span onclick="datosReservaTurno(' . $idTurno . ')">';

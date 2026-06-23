@@ -2,17 +2,22 @@
 /* 
 // Actualización Junio 2026
 Listado de citas de un consejero
-a partir de la fecha de hoy
+a partir de la fecha actual
 */
 
 require_once __DIR__ . "/../config.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
-$id  = $_GET['id'] ?? '';
+$id = (int)($_GET['id'] ?? 0);
 $hoy = date("Y-m-d");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    if ($id <= 0) {
+        echo json_encode("error");
+        exit();
+    }
 
     $sql = $con->prepare("
         SELECT
@@ -27,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             citas.time ASC
     ");
 
-    $sql->bindParam(':id', $id, PDO::PARAM_INT);
-    $sql->bindParam(':hoy', $hoy, PDO::PARAM_STR);
+    $sql->bindValue(':id', $id, PDO::PARAM_INT);
+    $sql->bindValue(':hoy', $hoy, PDO::PARAM_STR);
 
     $sql->execute();
 
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$resultado) {
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
@@ -42,5 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     echo json_encode($resultado);
     exit();
 }
-
-

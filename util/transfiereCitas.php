@@ -19,20 +19,23 @@ if ($id <= 0) {
     exit();
 }
 
-$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-$host = $_SERVER['HTTP_HOST'];
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-if ($host == 'localhost:8080') {
-    $baseUrl = "http://127.0.0.1";
-} elseif ($host == 'localhost') {
-    $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
-} else {
-    $baseUrl = $protocolo . "://" . $host;
+if (empty($serviceUrl)) {
+    echo "No se pudo detectar la URL del servicio.";
+    exit();
 }
 
-$url = $baseUrl . "/ws/asesores.php?cid=" . urlencode($cid);
+$url = $serviceUrl . "/ws/asesores.php?cid=" . urlencode($cid);
 
-$asesores = json_decode(file_get_contents($url), true);
+$jsonAsesores = @file_get_contents($url);
+
+if ($jsonAsesores === false) {
+    echo "No se pudo consultar el servicio de asesores.";
+    exit();
+}
+
+$asesores = json_decode($jsonAsesores, true);
 
 if ($asesores == "error" || empty($asesores) || !is_array($asesores)) {
     echo "Sin asesores disponibles";
@@ -46,9 +49,9 @@ echo '
             <option value="0">Seleccione el asesor</option>';
 
 foreach ($asesores as $asesor) {
-    $asesorId = (int) $asesor["id"];
-    $nombre = htmlspecialchars($asesor["name"]);
-    $apellido = htmlspecialchars($asesor["last"]);
+    $asesorId = (int)($asesor["id"] ?? 0);
+    $nombre = htmlspecialchars($asesor["name"] ?? '', ENT_QUOTES, 'UTF-8');
+    $apellido = htmlspecialchars($asesor["last"] ?? '', ENT_QUOTES, 'UTF-8');
 
     echo '<option value="' . $asesorId . '">' . $nombre . ' ' . $apellido . '</option>';
 }

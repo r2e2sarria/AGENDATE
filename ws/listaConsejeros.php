@@ -8,16 +8,25 @@ require_once __DIR__ . "/../config.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $sql = $con->prepare("
         SELECT
-            consejero.*
+            id,
+            name,
+            last,
+            mail,
+            gmail,
+            meet,
+            addr,
+            dpto,
+            city,
+            phone
         FROM
             consejero
         ORDER BY
-            name,
-            last
+            name ASC,
+            last ASC
     ");
 
     $sql->execute();
@@ -32,4 +41,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     echo json_encode($resultado);
     exit();
 }
-

@@ -17,38 +17,44 @@ if (empty($mail) || empty($pass)) {
     exit();
 }
 
-$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-$host = $_SERVER['HTTP_HOST'];
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
+$baseUrl    = $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-if ($host == 'localhost:8080') {
-    $baseUrl = "http://127.0.0.1";
-} elseif ($host == 'localhost') {
-    $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
-} else {
-    $baseUrl = $protocolo . "://" . $host;
+if (empty($serviceUrl)) {
+    echo "0";
+    exit();
 }
 
-$url = $baseUrl . "/ws/validaUser.php?mail=" .
+$url = $serviceUrl . "/ws/validaUser.php?mail=" .
        urlencode($mail) .
        "&pass=" .
        urlencode($pass);
 
-$user = json_decode(file_get_contents($url), true);
+$jsonUser = @file_get_contents($url);
 
-if ($user == "error" || empty($user)) {
-
+if ($jsonUser === false) {
     echo "0";
-
-} else {
-
-    session_regenerate_id(true);
-
-    $_SESSION = $user[0];
-
-    $_SESSION['log'] = 'on';
-    $_SESSION['baseUrl'] = $baseUrl;
-
-    echo "1";
+    exit();
 }
 
+$user = json_decode($jsonUser, true);
+
+if ($user == "error" || empty($user) || !is_array($user)) {
+    echo "0";
+    exit();
+}
+
+session_regenerate_id(true);
+
+$baseUrlAnterior = $baseUrl;
+$serviceUrlAnterior = $serviceUrl;
+
+$_SESSION = $user[0];
+
+$_SESSION['log'] = 'on';
+$_SESSION['url'] = $baseUrlAnterior;
+$_SESSION['baseUrl'] = $baseUrlAnterior;
+$_SESSION['serviceUrl'] = $serviceUrlAnterior;
+
+echo "1";
 exit();

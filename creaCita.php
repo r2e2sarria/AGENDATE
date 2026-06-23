@@ -5,19 +5,18 @@
 */
 
 include 'templates/head.php';
-
-$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
+require_once __DIR__ . "/config.php";
 
 $consejeros = [];
 
-if (!empty($serviceUrl)) {
-    $jsonConsejeros = @file_get_contents($serviceUrl . "/ws/listaConsejeros.php");
-    $data = json_decode($jsonConsejeros, true);
+$sql = $con->prepare("
+    SELECT id, name, last
+    FROM consejero
+    ORDER BY name, last
+");
 
-    if (is_array($data)) {
-        $consejeros = $data;
-    }
-}
+$sql->execute();
+$consejeros = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="mainbox">
@@ -34,13 +33,7 @@ if (!empty($serviceUrl)) {
 
             <?php foreach ($consejeros as $consejero): ?>
                 <option value="<?php echo (int)($consejero['id'] ?? 0); ?>">
-                    <?php
-                    echo htmlspecialchars(
-                        ($consejero['name'] ?? '') . ' ' . ($consejero['last'] ?? ''),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    );
-                    ?>
+                    <?php echo htmlspecialchars(($consejero['name'] ?? '') . ' ' . ($consejero['last'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>
                 </option>
             <?php endforeach; ?>
         </select>

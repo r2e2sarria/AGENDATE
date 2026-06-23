@@ -1,31 +1,39 @@
 <?php
 /*
-// Actualización Junio 2026
-Script para consultar y publicar las citas reservadas
-por un usuario.
+ // Actualización Junio 2026
+ Script para consultar y publicar las citas reservadas
+ por un usuario.
 */
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$email = $_POST['mail'] ?? '';
-$phone = $_POST['phone'] ?? '';
+$email = trim($_POST['mail'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
 
-$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
-$host = $_SERVER['HTTP_HOST'];
-
-if ($host == 'localhost:8080') {
-    $baseUrl = "http://127.0.0.1";
-} elseif ($host == 'localhost') {
-    $baseUrl = $protocolo . "://" . $host . "/AGENDATE";
-} else {
-    $baseUrl = $protocolo . "://" . $host;
+if (empty($email) || empty($phone)) {
+    echo "Debe ingresar correo y teléfono.";
+    exit();
 }
 
-$url = $baseUrl . "/ws/miscitas.php?email=" . urlencode($email) . "&phone=" . urlencode($phone);
+$serviceUrl = $_SESSION["serviceUrl"] ?? $_SESSION["baseUrl"] ?? $_SESSION["url"] ?? '';
 
-$miscitas = json_decode(file_get_contents($url), true);
+if (empty($serviceUrl)) {
+    echo "No se pudo detectar la URL del servicio.";
+    exit();
+}
+
+$url = $serviceUrl . "/ws/miscitas.php?email=" . urlencode($email) . "&phone=" . urlencode($phone);
+
+$jsonMiscitas = @file_get_contents($url);
+
+if ($jsonMiscitas === false) {
+    echo "No se pudo consultar el servicio de citas.";
+    exit();
+}
+
+$miscitas = json_decode($jsonMiscitas, true);
 
 if ($miscitas == 'error' || empty($miscitas) || !is_array($miscitas)) {
     echo "Sin citas reservadas a la fecha";
@@ -35,12 +43,12 @@ if ($miscitas == 'error' || empty($miscitas) || !is_array($miscitas)) {
 echo '<label for="subtit" class="mb20">LISTADO DE CITAS RESERVADAS</label>';
 
 foreach ($miscitas as $cita) {
-    $id = (int) $cita['id'];
-    $fecha = htmlspecialchars($cita['date']);
-    $nombre = htmlspecialchars($cita['name']);
-    $apellido = htmlspecialchars($cita['last']);
-    $hora = htmlspecialchars($cita['time']);
-    $duracion = htmlspecialchars($cita['duracion']);
+    $id = (int)($cita['id'] ?? 0);
+    $fecha = htmlspecialchars($cita['date'] ?? '', ENT_QUOTES, 'UTF-8');
+    $nombre = htmlspecialchars($cita['name'] ?? '', ENT_QUOTES, 'UTF-8');
+    $apellido = htmlspecialchars($cita['last'] ?? '', ENT_QUOTES, 'UTF-8');
+    $hora = htmlspecialchars($cita['time'] ?? '', ENT_QUOTES, 'UTF-8');
+    $duracion = htmlspecialchars($cita['duracion'] ?? '', ENT_QUOTES, 'UTF-8');
 
     echo '
     <div class="ml60 mt10">
@@ -48,7 +56,9 @@ foreach ($miscitas as $cita) {
         <b>CONSEJERO: </b>' . $nombre . ' ' . $apellido . '
         <br><b>HORA: </b>' . $hora . ' <b>tiempo: </b>' . $duracion . ' min.
         <br>
-        <textarea id="mensajeAdicional" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
+
+        <textarea id="mensajeAdicional' . $id . '" class="mt10 mb10 w95p fs08 h4 pa5"></textarea>
+
         <div id="msgServicio' . $id . '" class="block w100p tac fs10"></div>
 
         <div class="col col-between fs07 mt10 mb10">

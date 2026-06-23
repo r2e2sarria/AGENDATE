@@ -1,16 +1,22 @@
 <?php
 /* 
 // Actualización Junio 2026
-Encuentra los memos asociados a una cita por el código de la cita
+Encuentra los memos asociados a una cita
+a partir del ID de la cita
 */
 
 require_once __DIR__ . "/../config.php";
 
 header('Content-Type: application/json; charset=utf-8');
 
-$id = $_GET['id'] ?? '';
+$id = (int)($_GET['id'] ?? 0);
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    if ($id <= 0) {
+        echo json_encode("error");
+        exit();
+    }
 
     $sql = $con->prepare("
         SELECT
@@ -19,15 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             memos
         WHERE
             memos.id_cita = :id
+        ORDER BY
+            memos.id ASC
     ");
 
-    $sql->bindParam(':id', $id, PDO::PARAM_INT);
+    $sql->bindValue(':id', $id, PDO::PARAM_INT);
 
     $sql->execute();
 
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$resultado) {
+    if (empty($resultado)) {
         echo json_encode("error");
         exit();
     }
