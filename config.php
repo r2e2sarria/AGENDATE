@@ -6,8 +6,10 @@
 |--------------------------------------------------------------------------
 */
 
+$host = $_SERVER['HTTP_HOST'] ?? '';
+
 if (getenv('DB_HOST') !== false && getenv('DB_HOST') !== '') {
-    
+
     // ==========================
     // DOCKER
     // ==========================
@@ -17,7 +19,10 @@ if (getenv('DB_HOST') !== false && getenv('DB_HOST') !== '') {
     define('DB_PASS', getenv('DB_PASS'));
     define('DB_NAME', getenv('DB_NAME'));
 
-} elseif ($_SERVER['SERVER_ADDR'] == '143.95.247.240') {
+} elseif (
+    $host == 'jorgeasarria.com' ||
+    $host == 'www.jorgeasarria.com'
+) {
 
     // ==========================
     // PRODUCCIÓN
@@ -61,5 +66,4 @@ try {
         "<b>Base:</b> " . DB_NAME . "<br><br>" .
         $e->getMessage()
     );
-
 }
